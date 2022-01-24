@@ -1,6 +1,6 @@
 package microservices.book.gamification.game.badgeprocessors;
 
-import microservices.book.gamification.challenge.ChallengeSolvedDTO;
+import microservices.book.gamification.challenge.ChallengeSolvedEvent;
 import microservices.book.gamification.game.domain.BadgeType;
 import microservices.book.gamification.game.domain.ScoreCard;
 import microservices.book.gamification.game.domain.badgeprocessors.LuckyNumberBadgeProcessor;
@@ -29,7 +29,7 @@ public class LuckyNumberBadgeProcessorTest {
         Optional<BadgeType> badgeType = badgeProcessor
                 .processForOptionalBadge(1,
                         List.of(new ScoreCard(1L, 1L)),
-                        new ChallengeSolvedDTO(1L, true,
+                        new ChallengeSolvedEvent(1L, true,
                                 42, 1, 1L, "user"));
 
         assertThat(badgeType).contains(BadgeType.LUCKY_NUMBER);
@@ -40,7 +40,7 @@ public class LuckyNumberBadgeProcessorTest {
         Optional<BadgeType> badgeType = badgeProcessor
                 .processForOptionalBadge(1,
                         List.of(new ScoreCard(1L, 1L)),
-                        new ChallengeSolvedDTO(1L, true,
+                        new ChallengeSolvedEvent(1L, true,
                         1, 1, 1L, "user"));
 
         assertThat(badgeType).isEmpty();

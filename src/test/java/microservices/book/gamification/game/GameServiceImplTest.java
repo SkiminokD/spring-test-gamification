@@ -1,6 +1,6 @@
 package microservices.book.gamification.game;
 
-import microservices.book.gamification.challenge.ChallengeSolvedDTO;
+import microservices.book.gamification.challenge.ChallengeSolvedEvent;
 import microservices.book.gamification.game.GameService.GameResult;
 import microservices.book.gamification.game.domain.BadgeCard;
 import microservices.book.gamification.game.domain.BadgeType;
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -43,7 +42,7 @@ public class GameServiceImplTest {
     public void processCorrectAttemptTest() {
         // given
         long userId = 1L, attemptId = 10L;
-        ChallengeSolvedDTO attempt = new ChallengeSolvedDTO(
+        ChallengeSolvedEvent attempt = new ChallengeSolvedEvent(
                 attemptId, true, 50, 60, userId, "john_doe");
         ScoreCard scoreCard = new ScoreCard(userId, attemptId);
         given(scoreRepository.getTotalScoreForUser(userId))
@@ -74,7 +73,7 @@ public class GameServiceImplTest {
     public void processWrongAttemptTest() {
         // given
         long userId = 1L, attemptId = 10L;
-        ChallengeSolvedDTO attempt = new ChallengeSolvedDTO(
+        ChallengeSolvedEvent attempt = new ChallengeSolvedEvent(
                 attemptId, false, 50, 60, userId, "john_doe");
 
         // when
